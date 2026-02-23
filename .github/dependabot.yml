@@ -3,25 +3,45 @@ updates:
   - package-ecosystem: "cargo"
     directory: "ruby"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      cargo-ruby-dependencies:
+        patterns:
+          - "*"
 
   - package-ecosystem: "cargo"
     directory: "ql"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      cargo-ql-dependencies:
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    cooldown:
+      default-days: 7
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch', 'version-update:semver-minor']
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - "*"
 
   - package-ecosystem: "gomod"
     directory: "go/extractor"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    cooldown:
+      default-days: 7
     allow:
       - dependency-name: "golang.org/x/mod"
       - dependency-name: "golang.org/x/tools"
@@ -35,8 +55,14 @@ updates:
   - package-ecosystem: "gomod"
     directory: "go/ql/test"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+    cooldown:
+      default-days: 7
     ignore:
       - dependency-name: "*"
     reviewers:
       - "github/codeql-go"
+    groups:
+      gomod-test-dependencies:
+        patterns:
+          - "*"
